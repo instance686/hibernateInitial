@@ -1,10 +1,6 @@
 package com.org.hibernate.sample;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+  
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,7 +27,16 @@ public class HibernateTest {
 		Vehicle vh=new Vehicle();
 		vh.setVehicleName("Car");
 		
-		us2.setVehicle(vh);
+		Vehicle vh2=new Vehicle();
+		vh2.setVehicleName("Bike");
+		
+		us2.getVehicle().add(vh);
+		us2.getVehicle().add(vh2);
+		
+		vh.setUserDetails(us2);
+		vh2.setUserDetails(us2);
+		
+		
 		
 		sessionFactory=getSessionFactory();
 
@@ -40,6 +45,7 @@ public class HibernateTest {
 		session.beginTransaction();
 		session.save(us2);
 		session.save(vh);
+		session.save(vh2);
 		session.getTransaction().commit();
 		session.close();
 
