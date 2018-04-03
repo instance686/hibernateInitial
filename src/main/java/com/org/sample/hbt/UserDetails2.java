@@ -3,6 +3,7 @@ package com.org.sample.hbt;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class UserDetails2 {
 	private int userId;
 	@Column(name="USER_NAME")
 	private String userName;
-	@ManyToMany
+	@OneToMany(cascade= CascadeType.PERSIST)
 	private Collection<Vehicle> vehicle=new ArrayList<Vehicle>();
 	
 	

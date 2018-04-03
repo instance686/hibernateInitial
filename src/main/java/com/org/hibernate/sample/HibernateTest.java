@@ -33,20 +33,12 @@ public class HibernateTest {
 		us2.getVehicle().add(vh);
 		us2.getVehicle().add(vh2);
 		
-		vh.getUserDetails().add(us2);
-		vh2.getUserDetails().add(us2);
-		
-		
-		
-		
 		sessionFactory=getSessionFactory();
 
 		
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		session.save(us2);
-		session.save(vh);
-		session.save(vh2);
+		session.persist(us2);
 		session.getTransaction().commit();
 		session.close();
 
