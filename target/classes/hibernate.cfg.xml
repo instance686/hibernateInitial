@@ -21,6 +21,9 @@
         
         <mapping class="com.org.sample.hbt.UserDetails"/>
         <mapping class="com.org.sample.hbt.UserDetails1"/>
+         <mapping class="com.org.sample.hbt.UserDetails2"/>
+          <mapping class="com.org.sample.hbt.Vehicle"/>
+         
         
     </session-factory>
 </hibernate-configuration>
