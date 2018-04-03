@@ -33,8 +33,9 @@ public class HibernateTest {
 		us2.getVehicle().add(vh);
 		us2.getVehicle().add(vh2);
 		
-		vh.setUserDetails(us2);
-		vh2.setUserDetails(us2);
+		vh.getUserDetails().add(us2);
+		vh2.getUserDetails().add(us2);
+		
 		
 		
 		

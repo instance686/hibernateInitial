@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +22,7 @@ public class UserDetails2 {
 	private int userId;
 	@Column(name="USER_NAME")
 	private String userName;
-	@OneToMany(mappedBy="userDetails")//doesn't create a seperate table and includes USER_ID in vehicle table
+	@ManyToMany
 	private Collection<Vehicle> vehicle=new ArrayList<Vehicle>();
 	
 	
