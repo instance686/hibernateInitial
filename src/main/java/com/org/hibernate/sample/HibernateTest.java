@@ -29,7 +29,7 @@ public class HibernateTest {
 		session=sessionFactory.openSession();
 		session.beginTransaction();
 		UserDetails us=(UserDetails)session.get(UserDetails.class, 6);
-		System.out.println("User name pulled up is "+us.getUserName());
+		session.delete(us);
 		session.getTransaction().commit();
 		session.close();
 
