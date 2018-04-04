@@ -7,9 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 
 
 @Entity(name="USER_DETAILS")
+@NamedQuery(name="USER_DETAILS.byId",query="from USER_DETAILS where userId = ?")
+@NamedNativeQuery(name="USER_DETAILS.byName",query="select * from USER_DETAILS where USER_NAME = ?",
+resultClass=UserDetails.class)
 public class UserDetails {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)

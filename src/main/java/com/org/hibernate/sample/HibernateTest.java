@@ -25,13 +25,14 @@ public class HibernateTest {
 		sessionFactory=getSessionFactory();
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from USER_DETAILS where userId > ?");
-		query.setInteger(0, 5);
+		//Query query=session.getNamedQuery("USER_DETAILS.byId");-Named Query
+		Query query=session.getNamedQuery("USER_DETAILS.byName");//Native Query
+		query.setString(0, "USER 7");
 		List<UserDetails> users=(List<UserDetails>)query.list();
 		session.getTransaction().commit();
 		session.close();
 		System.out.println(users.size());
-		for(UserDetails us:users) {System.out.println(us.getUserName());}
+		for(UserDetails us:users) {System.out.println(us.getUserId());}
 		
 	}
 	
