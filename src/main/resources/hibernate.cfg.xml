@@ -23,6 +23,9 @@
         <mapping class="com.org.sample.hbt.UserDetails1"/>
          <mapping class="com.org.sample.hbt.UserDetails2"/>
           <mapping class="com.org.sample.hbt.Vehicle"/>
+          <mapping class="com.org.sample.hbt.TwoWheeler"/>
+       <mapping class="com.org.sample.hbt.FourWheeler"/>
+         
          
         
     </session-factory>

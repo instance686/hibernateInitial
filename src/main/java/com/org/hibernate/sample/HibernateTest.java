@@ -8,6 +8,8 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+import com.org.sample.hbt.FourWheeler;
+import com.org.sample.hbt.TwoWheeler;
 import com.org.sample.hbt.UserDetails2;
 import com.org.sample.hbt.Vehicle;
 
@@ -20,25 +22,25 @@ public class HibernateTest {
 	
 	public static void main(String args[]) {
 				
-	
-		UserDetails2 us2=new UserDetails2();
-		us2.setUserName("First User");
-		
 		Vehicle vh=new Vehicle();
 		vh.setVehicleName("Car");
 		
-		Vehicle vh2=new Vehicle();
-		vh2.setVehicleName("Bike");
+		TwoWheeler bike=new TwoWheeler();
+		bike.setVehicleName("Bike");
+		bike.setSteeringHandle("Bike Steering Handle");
 		
-		us2.getVehicle().add(vh);
-		us2.getVehicle().add(vh2);
+		FourWheeler car=new FourWheeler();
+		car.setVehicleName("Porsche");
+		car.setSteeringWheel("Porsche steering wheel");
 		
 		sessionFactory=getSessionFactory();
 
 		
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		session.persist(us2);
+		session.save(vh);
+		session.save(bike);
+		session.save(car);
 		session.getTransaction().commit();
 		session.close();
 
