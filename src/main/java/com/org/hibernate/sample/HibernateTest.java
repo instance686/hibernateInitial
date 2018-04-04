@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 import com.org.sample.hbt.FourWheeler;
 import com.org.sample.hbt.TwoWheeler;
+import com.org.sample.hbt.UserDetails;
 import com.org.sample.hbt.UserDetails2;
 import com.org.sample.hbt.Vehicle;
 
@@ -22,25 +23,16 @@ public class HibernateTest {
 	
 	public static void main(String args[]) {
 				
-		Vehicle vh=new Vehicle();
-		vh.setVehicleName("Car");
-		
-		TwoWheeler bike=new TwoWheeler();
-		bike.setVehicleName("Bike");
-		bike.setSteeringHandle("Bike Steering Handle");
-		
-		FourWheeler car=new FourWheeler();
-		car.setVehicleName("Porsche");
-		car.setSteeringWheel("Porsche steering wheel");
-		
 		sessionFactory=getSessionFactory();
 
 		
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		session.save(vh);
-		session.save(bike);
-		session.save(car);
+		for(int i=1;i<=10;i++) {
+			UserDetails us=new UserDetails();
+			us.setUserName("USER "+i);
+			session.save(us); 
+		}
 		session.getTransaction().commit();
 		session.close();
 
