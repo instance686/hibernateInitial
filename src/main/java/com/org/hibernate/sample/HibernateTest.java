@@ -28,13 +28,11 @@ public class HibernateTest {
 		
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		UserDetails us=(UserDetails)session.get(UserDetails.class, 6);
-		session.delete(us);
+		UserDetails us=(UserDetails)session.get(UserDetails.class, 5);
+		us.setUserName("Changed UserName");
+		session.update(us);
 		session.getTransaction().commit();
 		session.close();
-
-		
-		
 	}
 	
 	public static SessionFactory getSessionFactory() {
