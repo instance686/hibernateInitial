@@ -11,6 +11,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.org.sample.hbt.UserDetails;
@@ -27,12 +30,11 @@ public class HibernateTest {
 		sessionFactory=getSessionFactory();
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		Criteria criteria=session.createCriteria(UserDetails.class);
-		/*criteria
-				.add(Restrictions.gt("userId",5))
-				.add(Restrictions.like("userName", "%USER 1%"))
-				.add(Restrictions.between("userId", 5, 11));*/
-		criteria.add(Restrictions.or(Restrictions.between("userId", 0, 3), Restrictions.between("userId", 7, 11)));
+		Criteria criteria=session.createCriteria(UserDetails.class)
+		//		.setProjection(Projections.property("userId"));
+				//.setProjection(Projections.count("userId"))
+				.addOrder(Order.desc("userId"));
+		
 		List<UserDetails> users=(List<UserDetails>)criteria.list();
 		session.getTransaction().commit();
 		session.close();
