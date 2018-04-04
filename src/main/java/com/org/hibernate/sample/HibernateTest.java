@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
@@ -30,11 +31,15 @@ public class HibernateTest {
 		sessionFactory=getSessionFactory();
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		Criteria criteria=session.createCriteria(UserDetails.class)
-		//		.setProjection(Projections.property("userId"));
-				//.setProjection(Projections.count("userId"))
-				.addOrder(Order.desc("userId"));
 		
+		UserDetails exampleUser=new UserDetails();
+		//exampleUser.setUserId(7);-primary key and null properties are not considered
+		exampleUser.setUserName("USER 1%");
+		
+		Example example=Example.create(exampleUser).enableLike(); 
+		
+		Criteria criteria=session.createCriteria(UserDetails.class)
+							.add(example);
 		List<UserDetails> users=(List<UserDetails>)criteria.list();
 		session.getTransaction().commit();
 		session.close();
