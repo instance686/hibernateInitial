@@ -8,11 +8,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)//by default it goes for single table strategy
+@Inheritance(strategy=InheritanceType.JOINED)//by default it goes for single table strategy
 public class Vehicle {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue
 	private int vehicleId;
 	private String vehicleName;
 	
