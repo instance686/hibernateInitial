@@ -2,6 +2,9 @@ package com.org.hibernate.sample;
 
   
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -26,16 +29,11 @@ public class HibernateTest {
 		sessionFactory=getSessionFactory();
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		UserDetails user=(UserDetails)session.get(UserDetails.class, 1);
+		Query query=session.createQuery("from USER_DETAILS where userId > 5");
+		List<UserDetails> users=(List<UserDetails>)query.list();
 		session.getTransaction().commit();
 		session.close();
-			
-		session=sessionFactory.openSession();
-		session.beginTransaction();
-		session.update(user);
-		session.getTransaction().commit();
-		session.close();
-			
+		System.out.println("Size of result= "+users.size());	
 	}
 	
 	
