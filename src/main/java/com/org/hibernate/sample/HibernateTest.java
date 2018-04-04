@@ -28,11 +28,8 @@ public class HibernateTest {
 		
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		for(int i=1;i<=10;i++) {
-			UserDetails us=new UserDetails();
-			us.setUserName("USER "+i);
-			session.save(us); 
-		}
+		UserDetails us=(UserDetails)session.get(UserDetails.class, 6);
+		System.out.println("User name pulled up is "+us.getUserName());
 		session.getTransaction().commit();
 		session.close();
 
