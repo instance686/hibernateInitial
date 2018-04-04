@@ -22,18 +22,22 @@ public class HibernateTest {
 	static Session session;
 	
 	public static void main(String args[]) {
-				
+					
 		sessionFactory=getSessionFactory();
-
-		
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		UserDetails us=(UserDetails)session.get(UserDetails.class, 5);
-		us.setUserName("Changed UserName");
-		session.update(us);
+		UserDetails user=(UserDetails)session.get(UserDetails.class, 1);
 		session.getTransaction().commit();
 		session.close();
+			
+		session=sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(user);
+		session.getTransaction().commit();
+		session.close();
+			
 	}
+	
 	
 	public static SessionFactory getSessionFactory() {
 		Configuration cfg = new Configuration().configure("hibernate.cfg.xml");        	
