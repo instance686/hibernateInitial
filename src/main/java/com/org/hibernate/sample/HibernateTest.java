@@ -11,11 +11,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import com.org.sample.hbt.FourWheeler;
-import com.org.sample.hbt.TwoWheeler;
 import com.org.sample.hbt.UserDetails;
-import com.org.sample.hbt.UserDetails2;
-import com.org.sample.hbt.Vehicle;
 
 
 
@@ -29,11 +25,18 @@ public class HibernateTest {
 		sessionFactory=getSessionFactory();
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from USER_DETAILS where userId > 5");
-		List<UserDetails> users=(List<UserDetails>)query.list();
+		Query query=session.createQuery("select userName from USER_DETAILS where userId > 5");
+		query.setFirstResult(5);//skips first 5 records from above select statement
+		query.setMaxResults(4);//pulls only 4 records
+		//List<UserDetails> users=(List<UserDetails>)query.list();
+		List<String> users=(List<String>)query.list();
 		session.getTransaction().commit();
 		session.close();
-		System.out.println("Size of result= "+users.size());	
+		
+		for(String us:users) {
+			System.out.println(us);
+		}
+		
 	}
 	
 	
