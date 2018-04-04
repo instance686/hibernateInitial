@@ -4,12 +4,14 @@ package com.org.hibernate.sample;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 
 import com.org.sample.hbt.UserDetails;
 
@@ -25,10 +27,9 @@ public class HibernateTest {
 		sessionFactory=getSessionFactory();
 		session=sessionFactory.openSession();
 		session.beginTransaction();
-		//Query query=session.getNamedQuery("USER_DETAILS.byId");-Named Query
-		Query query=session.getNamedQuery("USER_DETAILS.byName");//Native Query
-		query.setString(0, "USER 7");
-		List<UserDetails> users=(List<UserDetails>)query.list();
+		Criteria criteria=session.createCriteria(UserDetails.class);
+		criteria.add(Restrictions.eq("userName","USER 7"));
+		List<UserDetails> users=(List<UserDetails>)criteria.list();
 		session.getTransaction().commit();
 		session.close();
 		System.out.println(users.size());
