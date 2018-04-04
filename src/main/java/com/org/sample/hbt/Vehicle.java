@@ -1,9 +1,5 @@
 package com.org.sample.hbt;
 
-
-
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,15 +8,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)//by default it goes for single table strategy
-@DiscriminatorColumn(
-		name="VEHICLE_TYPE",
-		discriminatorType=DiscriminatorType.STRING
-		)
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)//by default it goes for single table strategy
 public class Vehicle {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	private int vehicleId;
 	private String vehicleName;
 	
